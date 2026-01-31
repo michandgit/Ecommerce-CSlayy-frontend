@@ -22,7 +22,7 @@ const Items = () => {
   return (
    <div className="w-full py-10 px-6">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 ">
-        {latestFits.map((item) => (
+        {latestFits?.map((item) => (
           <Item
             key={item._id}
             itemId={item._id}
