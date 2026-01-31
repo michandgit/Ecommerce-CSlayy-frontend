@@ -10,7 +10,12 @@ const Women = () => {
         const fetchWomenProducts = async () => {
             try {
                 const products = await getProductsByCategoryWomen();
-                setWomenProducts(products);
+                if(products && Array.isArray(products)) {
+                  setWomenProducts(products);
+                } else {
+                  console.error("Error: API did not return an array:", products);
+                  setWomenProducts([]);
+                }
             } catch (error) {
                 console.error("Error fetching women products:", error);
             } finally {
