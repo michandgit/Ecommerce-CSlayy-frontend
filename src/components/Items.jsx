@@ -14,6 +14,12 @@ const Items = () => {
   useEffect(()=>{
     const fetchLatestProducts = async ()=>{
       const products = await getLatestProducts();
+      if (products && Array.isArray(products)) {
+        setLatestFits(products);
+      } else {
+        console.error("API did not return an array:", products);
+        setLatestFits([]);
+      }
       setLatestFits((prevProducts) => [...products]);
     }
     fetchLatestProducts();
