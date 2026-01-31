@@ -8,6 +8,7 @@ export const CartContext = createContext({
     addItem: () => { },
     removeItem: () => { },
     clearCart: () => { },
+    clearCartLocally: () => { },
     getTotalAmount: () => { },
     getItemCount: () => { }
 })
@@ -77,6 +78,10 @@ const CartContextProvider = ({ children }) => {
        
     }
 
+    const clearCartLocally = () => {
+        cartDispatcher({ type: 'SET_CART', items: [] });
+    }
+
     const getTotalAmount = () =>
     cartState.items.reduce((sum, item) => sum + item.subtotal, 0);
 
@@ -90,6 +95,7 @@ const CartContextProvider = ({ children }) => {
         addItem,
         removeItem,
         clearCart : clearCartItems,
+        clearCartLocally,
         getTotalAmount,
         getItemCount
     }

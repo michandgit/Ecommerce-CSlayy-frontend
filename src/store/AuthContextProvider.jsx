@@ -6,7 +6,8 @@ export const AuthContext = createContext({
     isAuth: false,
     isLoading: true,
     setIsAuthenticated:()=>{},
-    setUser: ()=>{}
+    setUser: ()=>{},
+    checkAuth: ()=>{}
 })
 
 const AuthContextProvider = ({children}) => {
@@ -24,9 +25,11 @@ const AuthContextProvider = ({children}) => {
                     setUser(response.data.user);
                 }else{
                     setIsAuthenticated(false);
+                    setUser(null);
                 }   
             }catch(error){
                 setIsAuthenticated(false);
+                setUser(null);
             }finally{
                 setTimeout(() => setIsLoading(false), 500); 
             }

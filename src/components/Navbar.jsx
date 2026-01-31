@@ -8,7 +8,7 @@ import { logout } from '../apis/apiCall';
 
 const Navbar = () => {
   const [itemCount, setItemCount] = useState(0);
-  const { getItemCount } = useContext(CartContext);
+  const { getItemCount, clearCartLocally } = useContext(CartContext);
   const { user, setUser, setIsAuthenticated } = useContext(AuthContext);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -44,15 +44,11 @@ const Navbar = () => {
     if (logout()) {
       setUser(null);
       setIsAuthenticated(false);
+      clearCartLocally();
       setMobileMenuOpen(false);
       setDropdownOpen(false);
-      
+      setItemCount(0);
       navigate('/');
-
-    }
-  }
-
-
   return (
     <nav className="bg-white shadow-md px-8 py-4 flex justify-between items-center">
 
