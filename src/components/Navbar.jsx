@@ -9,7 +9,7 @@ import { logout } from '../apis/apiCall';
 const Navbar = () => {
   const [itemCount, setItemCount] = useState(0);
   const { getItemCount } = useContext(CartContext);
-  const { user, setUser } = useContext(AuthContext);
+  const { user, setUser, setIsAuthenticated } = useContext(AuthContext);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const dropDownRef = useRef(null);
@@ -43,8 +43,10 @@ const Navbar = () => {
   function handleLogout() {
     if (logout()) {
       setUser(null);
+      setIsAuthenticated(false);
       setMobileMenuOpen(false);
       setDropdownOpen(false);
+      
       navigate('/');
 
     }
