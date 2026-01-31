@@ -49,6 +49,9 @@ const Navbar = () => {
       setDropdownOpen(false);
       setItemCount(0);
       navigate('/');
+    }
+  }
+
   return (
     <nav className="bg-white shadow-md px-8 py-4 flex justify-between items-center">
 
