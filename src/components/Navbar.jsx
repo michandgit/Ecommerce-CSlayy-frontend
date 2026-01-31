@@ -40,8 +40,10 @@ const Navbar = () => {
   }
   const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
 
-  function handleLogout() {
-    if (logout()) {
+  async function handleLogout() {
+    const success = await logout();
+
+    if (success) {
       setUser(null);
       setIsAuthenticated(false);
       clearCartLocally();
@@ -49,6 +51,8 @@ const Navbar = () => {
       setDropdownOpen(false);
       setItemCount(0);
       navigate('/');
+    }else{
+    console.error("Logout failed");
     }
   }
 
