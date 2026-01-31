@@ -11,7 +11,6 @@ const Orders = () => {
         const fetchOrders = async () => {
             try {
                 const orders = await getAllOrdersForUser();
-                console.log("Fetched Orders: ", orders);
                 setAllOrders(orders);
             } catch (error) {
                 console.error("Error fetching orders:", error);

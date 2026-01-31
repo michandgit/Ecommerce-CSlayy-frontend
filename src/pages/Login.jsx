@@ -15,13 +15,10 @@ const Login = () => {
 
   async function handleSubmission(e) {
     e.preventDefault();
-    console.log("Submitted!");
     const fd = new FormData(e.target);
    
     const email = fd.get('email');
     const password = fd.get('password');
-
-    console.log("Email: "+email+" password: "+password);
     if(!email || !password){
       setError('All fields should have a value.')
       return;
@@ -42,7 +39,6 @@ const Login = () => {
       }
     );
 
-    console.log("Response: ", response);
    
     setIsAuthenticated(true);
     setUser(response.data);

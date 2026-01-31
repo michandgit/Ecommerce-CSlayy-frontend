@@ -4,7 +4,6 @@ import axiosInstance from "./axiosInstance";
 export const getProductsByCategoryMen = async () => {
     try {
         const response = await axiosInstance.get("/products/category/men");
-        console.log("API Response: ", response);
         return response.data.products;
     } catch (error) {
         console.error("Error: ", error.message);
@@ -42,7 +41,6 @@ export const getProductById = async (id) => {
 
 
 export const addItemToCart = async (item) => {
-    console.log("Item in AddItem To cart: ",item);
     try {
         const response = await axiosInstance.post("/cart/add", {
             productId: item._id,
@@ -88,7 +86,6 @@ export const getAllOrdersForUser = async () =>{
 export const logout = async () => {
     try{
         const response = await axiosInstance.post("/auth/logout");
-        console.log("Logout Response: ", response);
         return true;
     }catch(error){
         console.error("Error during logout: ", error);

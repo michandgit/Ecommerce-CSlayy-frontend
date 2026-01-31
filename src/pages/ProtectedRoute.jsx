@@ -4,7 +4,6 @@ import { Navigate } from 'react-router-dom';
 
 const ProtectedRoute = ({children}) => {
   const {isAuth, isLoading,user} = useContext(AuthContext);
-  console.log("Protected Route Check - isAuth:", isAuth, "isLoading:", isLoading);
  
   if (isLoading) return <div>Checking authentication...</div>;
 

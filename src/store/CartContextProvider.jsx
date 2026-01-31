@@ -46,14 +46,12 @@ const CartContextProvider = ({ children }) => {
     }
 
     const addItem = async (item) => {
-        console.log("Adding this item to cart:", item);
         try {
              const updatedItems = await addItemToCart(item);
-             console.log("API addItem response:", updatedItems);
         cartDispatcher({ type: 'SET_CART', items: updatedItems });
             
         } catch (error) {
-            console.log("Error adding item to cart: ", error);
+             console.error("Error fetching cart items: ", error);
         }
        
     }
@@ -63,7 +61,7 @@ const CartContextProvider = ({ children }) => {
             const updatedItems = await removeItemFromCart(productId);
         cartDispatcher({ type: 'SET_CART', items: updatedItems });
         } catch (error) {
-            console.log("Error removing item from cart: ", error);
+             console.error("Error fetching cart items: ", error);
         }
         
     }
@@ -74,7 +72,7 @@ const CartContextProvider = ({ children }) => {
         cartDispatcher({ type: 'SET_CART', items: updatedItems });
             
         } catch (error) {
-            console.log("Error clearing cart: ", error);
+             console.error("Error fetching cart items: ", error);
         }
        
     }

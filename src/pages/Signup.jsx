@@ -36,7 +36,6 @@ const Signup = () => {
         }
       )
 
-     console.log("Response: ", response);
      setIsAuthenticated(true);
      setUser(response.data);
       setError('');
@@ -44,7 +43,6 @@ const Signup = () => {
       navigate("/");
 
     } catch (err) {
-      console.log(err);
       setError(err?.response?.data?.message || "Something went wrong!");
     }
 

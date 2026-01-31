@@ -10,7 +10,6 @@ const Men = () => {
     const fetchMenProducts = async () => {
       try {
         const products = await getProductsByCategoryMen();
-        console.log("men products:" , products);
         setMenProducts(products);
       } finally {
         setLoading(false);

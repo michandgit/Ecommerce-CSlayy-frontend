@@ -19,7 +19,6 @@ const AuthContextProvider = ({children}) => {
         const checkAuth = async()=>{
             try{
                 const response = await axiosInstance.get('/auth/check');
-                console.log("Auth Check Response: ", response); 
                 if(response.data.isAuthenticated){
                     setIsAuthenticated(true);
                     setUser(response.data.user);
@@ -27,7 +26,6 @@ const AuthContextProvider = ({children}) => {
                     setIsAuthenticated(false);
                 }   
             }catch(error){
-                console.log("error: ", error);
                 setIsAuthenticated(false);
             }finally{
                 setTimeout(() => setIsLoading(false), 500); 

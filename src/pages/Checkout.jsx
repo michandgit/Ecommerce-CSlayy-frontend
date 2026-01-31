@@ -32,12 +32,10 @@ const Checkout = () => {
     try {
       setLoading(true);
       const response = await axiosInstance.get('/orders/initialize');
-      console.log('Checkout initialized:', response.data);
       setCartData(response.data);
       setCartItems(response.data.cartItems);
       setLoading(false);
     } catch (error) {
-      console.log('Error initializing checkout:', error);
       setError('Failed to load checkout');
       setLoading(false);
     }
@@ -177,9 +175,6 @@ const Checkout = () => {
         razorpayPaymentId: paymentId,
         razorpayOrderId: razorpayOrderId
       });
-
-      console.log('Order created:', response.data);
-
       setCartItems([]);
       navigate(`/order-success/${response.data.orderId}`);
 
@@ -190,7 +185,6 @@ const Checkout = () => {
     }
   };
 
-  // ✅ Loading state
   if (loading && !cartData) {
     return (
       <div className="w-full min-h-screen flex flex-col items-center justify-center">
