@@ -2,6 +2,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useContext, useEffect } from 'react';
 import { getProductById } from '../apis/apiCall.jsx';
 import { CartContext } from '../store/CartContextProvider';
+import Loading from '../components/Loading.jsx';
 
 const ProductPage = () => {
     const [product, setProduct] = useState(null);
@@ -37,7 +38,7 @@ const ProductPage = () => {
         return instructions;
     };
 
-    if (!product) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+    if (!product) return <Loading/>;
 
     return (
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>
