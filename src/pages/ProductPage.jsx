@@ -5,7 +5,7 @@ import { CartContext } from '../store/CartContextProvider';
 
 const ProductPage = () => {
     const [product, setProduct] = useState(null);
-    const [selectedSize, setSelectedSize] = useState('M'); // Default size
+    const [selectedSize, setSelectedSize] = useState('M');
     const { addItem } = useContext(CartContext);
     const { id } = useParams();
     const navigate = useNavigate();
