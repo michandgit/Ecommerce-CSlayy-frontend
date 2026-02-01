@@ -8,18 +8,16 @@ import { logout } from '../apis/apiCall';
 
 const Navbar = () => {
   const [itemCount, setItemCount] = useState(0);
-  const { getItemCount, clearCartLocally } = useContext(CartContext);
+  const {items, getItemCount, clearCartLocally } = useContext(CartContext);
   const { user, setUser, setIsAuthenticated } = useContext(AuthContext);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const dropDownRef = useRef(null);
   const navigate = useNavigate();
 
-
-
   useEffect(() => {
     setItemCount(getItemCount());
-  }, [getItemCount]);
+  }, [items, getItemCount]);
 
   useEffect(()=>{
     const handleClickOutside = (event) => {
