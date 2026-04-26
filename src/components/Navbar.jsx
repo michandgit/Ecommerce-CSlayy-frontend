@@ -117,6 +117,7 @@ const Navbar = () => {
               {dropdownOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg z-50">
                   <Link to="/orders" onClick={() => setDropdownOpen(false)} className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Orders</Link>
+                  <Link to="/profile" onClick={() => setDropdownOpen(false)} className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Profile</Link>
                   <button onClick={handleLogout} className="w-full text-left block px-4 py-2 text-gray-700 hover:bg-gray-100 border-t">
                     <div className="flex justify-between items-center text-red-600">Logout <LogOut size={16} /></div>
                   </button>
