@@ -1,15 +1,27 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../apis/axiosInstance';
 import { CartContext } from '../store/CartContextProvider';
+import { AuthContext } from '../store/AuthContextProvider';
 
 const Checkout = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = React.useState({});
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    address: '',
+    city: '',
+    state: '',
+    zipCode: '',
+    paymentMethod: ''
+  });
   const { items, setCartItems } = useContext(CartContext);
-  const [error, setError] = React.useState(null);
-  const [loading, setLoading] = React.useState(false);
-  const [cartData, setCartData] = React.useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [cartData, setCartData] = useState(null);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -28,6 +40,21 @@ const Checkout = () => {
     initializeCheckout();
   }, []);
 
+  useEffect(() => {
+  if (user) {
+    setFormData({
+      firstName: user?.name?.split(' ')[0] || '',
+      lastName: user?.name?.split(' ')[1] || '',
+      email: user?.email || '',
+      phone: user?.phone || '',
+      address: user?.address || '',
+      city: user?.city || '',
+      state: user?.state || '',
+      zipCode: user?.zipCode || ''
+    });
+  }
+}, [user]);
+
   const initializeCheckout = async () => {
     try {
       setLoading(true);
@@ -40,6 +67,14 @@ const Checkout = () => {
       setLoading(false);
     }
   }
+
+  const handleInputChange = (e) => {
+  const { name, value } = e.target;
+  setFormData(prev => ({
+    ...prev,
+    [name]: value
+  }));
+};
 
   const validateForm = () => {
     if (!formData.firstName || !formData.lastName) {
@@ -194,7 +229,7 @@ const Checkout = () => {
     );
   }
 
- 
+
   if (!cartData || !items || items.length === 0) {
     return (
       <div className="w-full min-h-screen flex flex-col items-center justify-center">
@@ -241,6 +276,8 @@ const Checkout = () => {
                 type="text"
                 placeholder="First Name *"
                 required
+                value={formData.firstName}
+                onChange={handleInputChange}
               />
 
               <input
@@ -249,6 +286,8 @@ const Checkout = () => {
                 type="text"
                 placeholder="Last Name *"
                 required
+                value={formData.lastName}
+                onChange={handleInputChange}
               />
             </div>
 
@@ -258,6 +297,8 @@ const Checkout = () => {
               type="email"
               placeholder="Email *"
               required
+              value={formData.email}
+              onChange={handleInputChange}
             />
 
             <input
@@ -267,6 +308,8 @@ const Checkout = () => {
               placeholder="Phone Number (10 digits) *"
               pattern="[0-9]{10}"
               required
+              value={formData.phone}
+              onChange={handleInputChange}
             />
 
             <textarea
@@ -275,6 +318,8 @@ const Checkout = () => {
               rows="3"
               placeholder="Street Address *"
               required
+              value={formData.address}
+              onChange={handleInputChange}
             />
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -283,6 +328,8 @@ const Checkout = () => {
                 className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-400"
                 type="text"
                 placeholder="City"
+                value={formData.city}
+                onChange={handleInputChange}
               />
 
               <input
@@ -290,6 +337,8 @@ const Checkout = () => {
                 className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-400"
                 type="text"
                 placeholder="State"
+                value={formData.state}
+                onChange={handleInputChange}
               />
 
               <input
@@ -297,6 +346,8 @@ const Checkout = () => {
                 className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-400"
                 type="text"
                 placeholder="ZIP Code"
+                value={formData.zipCode}
+                onChange={handleInputChange}
               />
             </div>
           </div>
@@ -309,6 +360,8 @@ const Checkout = () => {
               className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-400"
               name="paymentMethod"
               required
+              value={formData.paymentMethod}
+              onChange={handleInputChange}
             >
               <option value="">Select Payment Method</option>
               <option value="card">Credit/Debit Card</option>
