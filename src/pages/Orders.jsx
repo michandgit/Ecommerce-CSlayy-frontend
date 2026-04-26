@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { getAllOrdersForUser } from "../apis/apiCall";
 import { Package, Calendar, DollarSign, ChevronRight } from 'lucide-react';
 import Order from '../components/Order';
+import { useNavigate } from 'react-router-dom';
 
 const Orders = () => {
     const [allOrders, setAllOrders] = useState([]);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchOrders = async () => {
@@ -42,7 +44,7 @@ const Orders = () => {
                         <Package className="mx-auto h-16 w-16 text-gray-300 mb-4" />
                         <h2 className="text-xl font-medium text-gray-900">No orders yet</h2>
                         <p className="mt-1 text-gray-500">When you buy something, it will appear here.</p>
-                        <button className="mt-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-orange-600 hover:bg-orange-700">
+                        <button onClick={()=>navigate("/")} className="mt-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-orange-600 hover:bg-orange-700">
                             Start Shopping
                         </button>
                     </div>
