@@ -17,6 +17,7 @@ import CartPage from "./pages/CartPage";
 import Checkout from "./pages/Checkout";
 import OrderSuccess from "./pages/OrderSuccess";
 import Orders from "./pages/Orders";
+import Profile from "./pages/profile";
 
 const router = createBrowserRouter([
     {
@@ -30,7 +31,8 @@ const router = createBrowserRouter([
             { path: 'cart', element: <ProtectedRoute><CartPage /></ProtectedRoute> },
             {path: 'checkout', element: <ProtectedRoute><Checkout /></ProtectedRoute> },
             {path: 'order-success/:orderId', element: <ProtectedRoute><OrderSuccess /></ProtectedRoute> },
-            {path:'orders', element:<ProtectedRoute><Orders /></ProtectedRoute>}
+            {path:'orders', element:<ProtectedRoute><Orders /></ProtectedRoute>},
+            {path: 'profile', element: <ProtectedRoute><Profile /></ProtectedRoute> }
         ]
     },
     {
